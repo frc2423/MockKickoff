@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.NeoMotor;
+import frc.robot.Robot;
 
 
 public class Catapult {
@@ -34,7 +36,7 @@ public class Catapult {
     private CANCoder shoulderEncoder = new CANCoder(25);
     CANCoderConfiguration _canCoderConfiguration = new CANCoderConfiguration();
     ProfiledPIDController shoulder_PID = new ProfiledPIDController((Robot.isSimulation()) ? .001 : .005, 0, 0, new TrapezoidProfile.Constraints(360, 420));//noice
-    private ArmFeedforward feedforward = new ArmFeedforward(0.16623, kg, 17.022, 1.7561);
+    private ArmFeedforward feedforward = new ArmFeedforward(0.16623, 1, 17.022, 1.7561);
     private double shoulderVoltage = 0;
     public static final double MAX_SHOULDER_VOLTAGE = 4;
     private Rotation2d shoulderSetpoint = new Rotation2d();
@@ -128,7 +130,6 @@ public class Catapult {
     public boolean getLimitSwitch() {
         return limitSwitch.get();
     }
-    
     
     public void shoot(double speedInRadians){
         setShoulderSetpoint(shoulderAngle);

@@ -1,13 +1,9 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
-import frc.robot.devices.*;
-
-import frc.robot.devices.IEncoder;
-
 import com.ctre.phoenix.sensors.CANCoder;
 
 public class NeoMotor {
@@ -34,7 +30,7 @@ public class NeoMotor {
         motor = new CANSparkMax(port, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.getAbsoluteEncoder(Type.kDutyCycle).getVelocityConversionFactor();
-        encoder = isAbsoluteEncoder ? new frc.robot.devices.AbsoluteEncoder(motor) : new frc.robot.devices.RelativeEncoder(motor);
+        encoder = isAbsoluteEncoder ? new frc.robot.subsystems.AbsoluteEncoder(motor) : new frc.robot.subsystems.RelativeEncoder(motor);
         pidController = motor.getPIDController();
         setPercent(0);
     }
