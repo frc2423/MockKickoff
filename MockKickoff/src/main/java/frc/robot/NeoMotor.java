@@ -1,9 +1,13 @@
-package frc.robot.devices;
+package frc.robot;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
+import frc.robot.devices.*;
+
+import frc.robot.devices.IEncoder;
+
 import com.ctre.phoenix.sensors.CANCoder;
 
 public class NeoMotor {
@@ -17,7 +21,6 @@ public class NeoMotor {
     private CANSparkMax.ControlType motorControlType = CANSparkMax.ControlType.kDutyCycle;
     private NeoMotor followerMotor;
     private boolean enabled = true;
-
 
     // These are needed because getting these values from the PIDController
     // takes an excessively long time for some reason
@@ -159,7 +162,6 @@ public class NeoMotor {
         if (enabled == false){
             return;
         }
-
         boolean hasChanged = newValue != motorValue || newControlType != motorControlType;
         if (hasChanged) {
             motorValue = newValue;
@@ -190,5 +192,5 @@ public class NeoMotor {
         }
         enabled = isEnabled;
     }
-
+    
 }
