@@ -5,12 +5,16 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Catapult;
 
 /** An example command that uses an example subsystem. */
 public class ExampleCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ExampleSubsystem m_subsystem;
+  private Rotation2d shoulderAngle = new Rotation2d(250);
+  Catapult catapult;
 
   /**
    * Creates a new ExampleCommand.
@@ -19,21 +23,29 @@ public class ExampleCommand extends CommandBase {
    */
   public ExampleCommand(ExampleSubsystem subsystem) {
     m_subsystem = subsystem;
+    Catapult catapult = new Catapult();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+  @Override//prep
+  public void initialize() {
+    catapult.setShoulderSetpoint(shoulderAngle);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    catapult.shoot(4);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    if(catapult.getLimitSwitch() == true)
+
+  }
 
   // Returns true when the command should end.
   @Override
