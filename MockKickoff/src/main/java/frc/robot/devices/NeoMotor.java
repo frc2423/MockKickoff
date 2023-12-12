@@ -18,6 +18,7 @@ public class NeoMotor {
     private NeoMotor followerMotor;
     private boolean enabled = true;
 
+
     // These are needed because getting these values from the PIDController
     // takes an excessively long time for some reason
     private double kP = 0;
@@ -158,6 +159,7 @@ public class NeoMotor {
         if (enabled == false){
             return;
         }
+
         boolean hasChanged = newValue != motorValue || newControlType != motorControlType;
         if (hasChanged) {
             motorValue = newValue;
@@ -188,5 +190,5 @@ public class NeoMotor {
         }
         enabled = isEnabled;
     }
-    
+
 }
